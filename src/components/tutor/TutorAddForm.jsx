@@ -50,7 +50,7 @@ const TutorAddForm = () => {
 
     if(res.ok){
       toast.success("Tutor successfully added")
-      router.refresh("/add-tutor");
+      router.push("/tutors");
     }else{
       toast.error("Failed to add tutor");
       console.log(data, res.status)
@@ -208,7 +208,9 @@ const TutorAddForm = () => {
                 <option value="Physics">Physics</option>
                 <option value="Chemistry">Chemistry</option>
                 <option value="Biology">Biology</option>
+                <option value="Science">Science</option>
                 <option value="Computer Science">Computer Science</option>
+                <option value="ICT">ICT</option>
                 <option value="English">English</option>
                 <option value="History">History</option>
               </select>
