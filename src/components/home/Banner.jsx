@@ -159,7 +159,8 @@ export default function Banner() {
 
           <div className="relative z-10 flex h-full items-center">
             <div className="mx-auto flex max-w-7xl flex-col gap-10 px-6 lg:flex-row lg:items-center lg:justify-between">
-              <div className="max-w-2xl text-white">
+
+              <div className="max-w-4xl text-white flex flex-col justify-center items-center">
                 <span className="mb-4 inline-block rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm backdrop-blur">
                   🎓 Trusted Learning Platform
                 </span>
@@ -176,16 +177,10 @@ export default function Banner() {
                   <Link href="/tutors">
                     <Button size="lg">Explore Tutors</Button>
                   </Link>
-
-                  <Link href="/signup">
-                    <Button variant="outline" size="lg">
-                      Get Started
-                    </Button>
-                  </Link>
                 </div>
               </div>
 
-              <div className="hidden lg:block">
+              {/* <div className="hidden lg:block">
                 <div className="grid grid-cols-2 gap-5">
                   <div className="rounded-2xl border border-white/20 bg-white/10 p-6 text-white backdrop-blur-lg">
                     <h2 className="text-3xl font-bold">500+</h2>
@@ -211,7 +206,7 @@ export default function Banner() {
                     </p>
                   </div>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

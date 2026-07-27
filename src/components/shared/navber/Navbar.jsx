@@ -10,17 +10,16 @@ import { Button } from "@/components/ui/button";
 import NavLinks from "./NavLinks";
 import ThemeToggle from "./ThemeToggle";
 import MobileMenu from "./MobileMenu";
+import { authClient } from "@/lib/auth-client";
+import UserMenu from "./UserMenu";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
 
-  // Better Auth
-  const user = null;
+  const {data: session} = authClient.useSession()
+  const user = session?.user
 
-  const handleLogout = () => {
-    console.log("logout");
-  };
-
+ 
   return (
     <header className="sticky top-0 z-50 border-b border-border/50 bg-background/80 backdrop-blur-xl">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 lg:px-6">
@@ -37,7 +36,7 @@ const Navbar = () => {
           </Button>
 
           <Link href="/" className="flex items-center gap-2">
-            <Image src="/logo.png" width={42} height={42} alt="SMART TUTOR" />
+            <Image src="/logo.png" width={42} height={42} alt="SMART TUTOR" priority/>
 
             <div className="hidden sm:block">
               <h2 className="text-lg font-bold tracking-wide">SMART TUTOR</h2>
@@ -52,7 +51,7 @@ const Navbar = () => {
         {/* Center */}
 
         <nav className="hidden items-center gap-7 lg:flex">
-          <NavLinks />
+          <NavLinks user={user}/>
         </nav>
 
         {/* Right */}
@@ -62,11 +61,7 @@ const Navbar = () => {
 
           {user ? (
             <>
-              <Button variant="ghost">Profile</Button>
-
-              <Button variant="destructive" onClick={handleLogout}>
-                Logout
-              </Button>
+              <UserMenu user={session?.user} />
             </>
           ) : (
             <>
@@ -86,7 +81,6 @@ const Navbar = () => {
         open={open}
         setOpen={setOpen}
         user={user}
-        handleLogout={handleLogout}
       />
     </header>
   );

@@ -23,7 +23,7 @@ const PasswordRules = ({ password = "" }) => {
   ];
 
   return (
-    <div className="mt-5 rounded-xl border border-border bg-muted/40 p-4 transition-colors">
+    <div className="mt-3">
       <p className="mb-3 text-sm font-semibold text-foreground">
         Password Requirements
       </p>

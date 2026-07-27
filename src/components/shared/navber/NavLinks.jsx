@@ -7,32 +7,40 @@ const links = [
   {
     title: "Home",
     href: "/",
+    private: false,
   },
   {
     title: "Tutors",
     href: "/tutors",
+    private: false,
   },
   {
     title: "Add Tutor",
     href: "/add-tutor",
+    private: true,
   },
   {
     title: "My Tutors",
     href: "/my-tutors",
+    private: true,
   },
   {
     title: "Booked Sessions",
     href: "/my-booked-sessions",
+    private: true,
   },
 ];
 
-const NavLinks = ({ mobile = false, onClick }) => {
+const NavLinks = ({ user, mobile = false, onClick }) => {
   const pathname = usePathname();
+
+  const visibleLinks = links.filter((link) => (link.private ? !!user : true));
 
   return (
     <>
-      {links.map(({ title, href }) => {
-        const active = pathname === href;
+      {visibleLinks.map(({ title, href }) => {
+        const active =
+          href === "/" ? pathname === "/" : pathname.startsWith(href);
 
         return (
           <Link
@@ -43,21 +51,24 @@ const NavLinks = ({ mobile = false, onClick }) => {
               mobile
                 ? `
                     block rounded-xl px-4 py-3
+                    font-medium
                     transition-all duration-200
                     ${
                       active
                         ? "bg-primary text-primary-foreground"
-                        : "hover:bg-muted text-muted-foreground hover:text-foreground"
+                        : "text-muted-foreground hover:bg-muted hover:text-foreground"
                     }
                   `
                 : `
                     relative px-1 py-2
-                    font-medium transition-colors duration-300
+                    font-medium
+                    transition-colors duration-300
                     ${
                       active
                         ? "text-primary"
                         : "text-muted-foreground hover:text-foreground"
                     }
+
                     after:absolute
                     after:left-0
                     after:-bottom-1

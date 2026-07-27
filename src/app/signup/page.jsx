@@ -18,6 +18,9 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import PasswordRules from "@/components/ui/password-rules";
+import { authClient } from "@/lib/auth-client";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 const SignUpPage = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -31,12 +34,32 @@ const SignUpPage = () => {
 
   const password = watch("password", "");
 
-  const handleSubmitForm = (data) => {
-    console.log(data);
+  const router = useRouter()
+  const handleSubmitForm = async (data) => {
+
+    const {name, image, email, password} = data
+
+    const {data:res, error} = await authClient.signUp.email({
+      name,email,image,password,
+    })
+     if(error){
+      toast.error(error.message)
+      return
+     }
+     if(res){
+      await authClient.signOut()
+      toast.success("Account created successfully. Please login");
+
+      setTimeout(()=>{
+        router.push("/login")
+      },1200)
+     }
+
+
   };
 
   return (
-    <section className="min-h-screen bg-background py-16 transition-colors">
+    <section className="min-h-screen bg-background py-12 transition-colors">
       <div className="mx-auto w-11/12 max-w-lg">
         {/* Header */}
 
@@ -58,7 +81,7 @@ const SignUpPage = () => {
         {/* Card */}
 
         <div className="rounded-3xl border border-border bg-card p-8 shadow-xl transition-colors">
-          <form onSubmit={handleSubmit(handleSubmitForm)} className="space-y-6">
+          <form onSubmit={handleSubmit(handleSubmitForm)} className="space-y-4">
             {/* Full Name */}
 
             <div>
@@ -139,7 +162,7 @@ const SignUpPage = () => {
 
             {/* Password */}
 
-            <div>
+            <div className="">
               <Label
                 htmlFor="password"
                 className="mb-2 block text-sm font-medium"

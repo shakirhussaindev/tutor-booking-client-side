@@ -16,8 +16,15 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
+import { authClient } from "@/lib/auth-client";
+import toast from "react-hot-toast";
+import { useRouter, useSearchParams } from "next/navigation";
 
 const LoginPage = () => {
+
+  const searchParams = useSearchParams()
+  const redirectTo = searchParams.get("redirect") || "/"
+  const router = useRouter()
   const [showPassword, setShowPassword] = useState(false);
 
   const {
@@ -26,8 +33,25 @@ const LoginPage = () => {
     formState: { errors },
   } = useForm();
 
-  const handleLogin = (data) => {
-    console.log(data);
+  const handleLogin = async (data) => {
+    
+    const {email, password} = data
+
+    const {data:res, error} = await authClient.signIn.email({
+      email,password, rememberMe: true,
+    })
+
+    if(error){
+      toast.error(error.message)
+      return
+    }
+    if(res){
+      toast.success("Login successfull")
+      
+      setTimeout(()=>{
+        router.push(redirectTo)
+      },1200)
+    }
   };
 
   return (
