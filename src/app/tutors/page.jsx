@@ -1,5 +1,6 @@
 import SearchFilter from "@/components/tutor/SearchFilter";
 import TutorCard from "@/components/tutor/TutorCard";
+import { Button } from "@/components/ui/button";
 import { FiSearch } from "react-icons/fi";
 
 const TutorsPage = async ({ searchParams }) => {
@@ -40,8 +41,6 @@ const TutorsPage = async ({ searchParams }) => {
             ) : (
               <div className="col-span-full py-10">
                 <div className="mx-auto max-w-xl text-center">
-                  
-
                   {/* Title */}
 
                   <h2 className="mt-6 text-[clamp(1.4rem,2vw,2rem)] font-bold text-red-400">

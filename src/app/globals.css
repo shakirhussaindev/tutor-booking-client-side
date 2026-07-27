@@ -1,12 +1,9 @@
 @import "tailwindcss";
-@import "@heroui/styles";
 @import "tw-animate-css";
-@import "shadcn/tailwind.css";
 
 @custom-variant dark (&:is(.dark *)); 
-@plugin "daisyui"; 
 
-@theme inline { 
+@theme { 
     --font-heading: var(--font-sans); 
     --font-sans: var(--font-sans); 
     --color-sidebar-ring: var(--sidebar-ring); 
@@ -128,4 +125,27 @@
   html {
     @apply font-sans;
     }
+}
+
+/* Chrome Autofill Fix */
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px #fff inset !important;
+  -webkit-text-fill-color: #0f172a !important;
+  caret-color: #0f172a;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+.dark input:-webkit-autofill,
+.dark input:-webkit-autofill:hover,
+.dark input:-webkit-autofill:focus,
+.dark textarea:-webkit-autofill,
+.dark select:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px #0f172a inset !important;
+  -webkit-text-fill-color: #fff !important;
+  caret-color: #fff;
 }

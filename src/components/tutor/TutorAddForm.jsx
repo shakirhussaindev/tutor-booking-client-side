@@ -1,16 +1,6 @@
 "use client";
 
-import {
-  FieldError,
-  Form,
-  Input,
-  Label,
-  TextField,
-  Select,
-  ListBox,
-  TextArea,
-  Button,
-} from "@heroui/react";
+
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import {
@@ -58,7 +48,7 @@ const TutorAddForm = () => {
     
   };
   return (
-    <Form
+    <form
       onSubmit={onSubmit}
       className="rounded-xl bg-white/80 backdrop-blur-xl border border-white shadow-[0_25px_80px_rgba(0,0,0,0.08)] p-8 md:p-12"
     >
@@ -81,90 +71,90 @@ const TutorAddForm = () => {
       <div className="grid md:grid-cols-2 gap-5">
         {/* Tutor Name */}
 
-        <TextField name="name" isRequired>
-          <Label className="font-medium text-gray-700 mb-1 block">
+        <div name="name" >
+          <label className="font-medium text-gray-700 mb-1 block">
             Tutor Name
-          </Label>
+          </label>
 
-          <Input
+          <input
             type="text"
             placeholder="Enter your full name"
             className="input w-full h-12 rounded-xl border-2 border-gray-200 pl-8 bg-white focus:border-sky-500 focus:outline-none"
           />
-          <FieldError />
-        </TextField>
+          
+        </div>
 
         {/* Image */}
 
-        <TextField name="image" isRequired>
-          <Label className="font-medium text-gray-700 mb-1 block">
+        <div name="image" >
+          <label className="font-medium text-gray-700 mb-1 block">
             Profile Image
-          </Label>
+          </label>
 
-          <Input
+          <input
             type="url"
             placeholder="https://example.com/photo.jpg"
             className="input w-full h-12 rounded-xl border-2 border-gray-200 pl-8 bg-white focus:border-sky-500 focus:outline-none"
           />
-          <FieldError />
-        </TextField>
+          
+        </div>
 
         {/* Email */}
-        <TextField name="email" isRequired>
-          <Label className="font-medium text-gray-700 mb-1 block">Email</Label>
+        <div name="email" >
+          <label className="font-medium text-gray-700 mb-1 block">Email</label>
 
-          <Input
+          <input
             type="email"
             placeholder="example@gmail.com"
             className="input w-full h-12 rounded-xl border-2 border-gray-200 pl-8 bg-white focus:border-sky-500 focus:outline-none"
           />
-          <FieldError />
-        </TextField>
+          
+        </div>
 
         {/* Phone */}
 
-        <TextField name="phone" isRequired>
-          <Label className="font-medium text-gray-700 mb-1 block">
+        <div name="phone" >
+          <label className="font-medium text-gray-700 mb-1 block">
             Phone Number
-          </Label>
+          </label>
           <div className="relative">
             <FiPhone className="absolute left-4 top-1/2 -translate-y-1/2 text-sky-500 text-lg" />
-            <Input
+            <input
               type="number"
               placeholder="+8801XXXXXXXXX"
-              className="input w-full h-12 rounded-xl border-2 border-gray-200 pl-8 bg-white focus:border-sky-500 focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+              className="input w-full h-12 rounded-xl border-2 border-gray-200 pl-8 bg-white focus:border-sky-500 focus:outline-none [appearance:div] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
             />
           </div>
-          <FieldError />
-        </TextField>
+          
+        </div>
 
         {/* Institution */}
-        <TextField name="institution" isRequired>
-          <Label className="font-medium text-gray-700 mb-1 block">
+        <div name="institution" >
+          <label className="font-medium text-gray-700 mb-1 block">
             Institution
-          </Label>
+          </label>
 
-          <Input
+          <input
             type="text"
             placeholder="Dhaka University"
             className="input w-full h-12 rounded-xl border-2 border-gray-200 pl-8 bg-white focus:border-sky-500 focus:outline-none"
           />
-          <FieldError />
-        </TextField>
+          
+        </div>
 
         {/* Location */}
-        <TextField name="location" isRequired>
-          <Label className="font-medium text-gray-700 mb-1 block">
+        <div name="location" >
+          <label className="font-medium text-gray-700 mb-1 block">
             Location
-          </Label>
+          </label>
 
-          <Input
+          <input
             type="text"
             placeholder="Dhaka"
             className="input w-full h-12 rounded-xl border-2 border-gray-200 pl-8 bg-white focus:border-sky-500 focus:outline-none"
           />
-          <FieldError />
-        </TextField>
+          
+        </div>
       </div>
 
       {/* ================= TEACHING INFO ================= */}
@@ -187,10 +177,10 @@ const TutorAddForm = () => {
         </div>
 
         <div className="grid md:grid-cols-2 gap-4">
-          <TextField isRequired>
-            <Label className="font-medium text-gray-700 mb-1 block">
+          <div >
+            <label className="font-medium text-gray-700 mb-1 block">
               Subject
-            </Label>
+            </label>
 
             <div className="relative">
               <FiBookOpen className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" />
@@ -217,13 +207,13 @@ const TutorAddForm = () => {
 
               <IoIosArrowDown className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 pointer-events-none" />
             </div>
-            <FieldError />
-          </TextField>
+            
+          </div>
 
-          <TextField isRequired>
-            <Label className="font-medium text-gray-700 mb-1 block">
+          <div >
+            <label className="font-medium text-gray-700 mb-1 block">
               Teaching Mode
-            </Label>
+            </label>
 
             <div className="relative">
               <FiMonitor className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" />
@@ -246,64 +236,64 @@ const TutorAddForm = () => {
               <IoIosArrowDown className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 pointer-events-none" />
             </div>
 
-            <FieldError />
-          </TextField>
+            
+          </div>
 
-          <TextField name="AvailableDays" isRequired>
-            <Label className="font-medium text-gray-700 mb-1 block">
+          <div name="AvailableDays" >
+            <label className="font-medium text-gray-700 mb-1 block">
               Available Days Time
-            </Label>
+            </label>
 
-            <Input
+            <input
               type="text"
               placeholder="Sat - Thu, 5:00 PM - 8:00 PM"
               className="input w-full h-12 rounded-xl border-2 border-gray-200 pl-8 bg-white focus:border-sky-500 focus:outline-none"
             />
-            <FieldError />
-          </TextField>
+            
+          </div>
 
-          <TextField name="StartDate" isRequired type="date">
-            <Label className="font-medium text-gray-700 mb-1 block">
+          <div name="StartDate"  type="date">
+            <label className="font-medium text-gray-700 mb-1 block">
               Session Start Date
-            </Label>
+            </label>
 
             <div className="relative">
               <FiCalendar className="absolute left-4 top-1/2 -translate-y-1/2 text-indigo-500" />
-              <Input
+              <input
                 type="date"
                 placeholder="Sat - Thu"
                 className="input w-full h-12 rounded-xl border-2 border-gray-200 pl-8 bg-white focus:border-sky-500 focus:outline-none"
               />
             </div>
-            <FieldError />
-          </TextField>
+            
+          </div>
 
-          <TextField name="experience" isRequired>
-            <Label className="font-medium text-gray-700 mb-1 block">
+          <div name="experience" >
+            <label className="font-medium text-gray-700 mb-1 block">
               Experience
-            </Label>
+            </label>
 
-            <Input
+            <input
               type="text"
               placeholder="3 Years"
               className="input w-full h-12 rounded-xl border-2 border-gray-200 pl-8 bg-white focus:border-sky-500 focus:outline-none"
             />
-            <FieldError />
-          </TextField>
+            
+          </div>
         </div>
 
-        <TextField className="mt-5" name="about" isRequired>
-          <Label className="font-semibold text-gray-700 mb-2 block">
+        <div className="mt-5" name="about" >
+          <label className="font-semibold text-gray-700 mb-2 block">
             About Yourself
-          </Label>
+          </label>
 
-          <TextArea
+          <textArea
             rows={3}
             placeholder="Describe your teaching experience, teaching style, achievements and why students should choose you..."
-            className="textarea w-full rounded-xl border-2 border-gray-200 bg-white resize-none p-5"
-          ></TextArea>
-          <FieldError />
-        </TextField>
+            className="textArea w-full rounded-xl border-2 border-gray-200 bg-white resize-none p-5"
+          ></textArea>
+          
+        </div>
       </div>
 
       {/* ================= PRICING ================= */}
@@ -326,40 +316,40 @@ const TutorAddForm = () => {
         </div>
 
         <div className="grid md:grid-cols-2 gap-4">
-          <TextField name="HourlyFee" isRequired>
-            <Label className="font-medium text-gray-700 mb-1 block">
+          <div name="HourlyFee" >
+            <label className="font-medium text-gray-700 mb-1 block">
               Hourly Fee
-            </Label>
+            </label>
 
             <div className="relative">
               <FiDollarSign className="absolute left-4 top-1/2 -translate-y-1/2 text-emerald-500" />
 
-              <Input
+              <input
                 type="number"
                 placeholder="500"
-                className="input w-full h-12 rounded-xl border-2 border-gray-200 pl-8 bg-white [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                className="input w-full h-12 rounded-xl border-2 border-gray-200 pl-8 bg-white [appearance:div] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
               />
             </div>
-            <FieldError />
-          </TextField>
+            
+          </div>
 
-          <TextField name="TotalSlots" isRequired>
-            <Label className="font-medium text-gray-700 mb-1 block">
+          <div name="TotalSlots" >
+            <label className="font-medium text-gray-700 mb-1 block">
               Total Slots
-            </Label>
+            </label>
 
-            <Input
+            <input
               type="number"
               placeholder="500"
-              className="input w-full h-12 rounded-xl border-2 border-gray-200 pl-8 bg-white [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+              className="input w-full h-12 rounded-xl border-2 border-gray-200 pl-8 bg-white [appearance:div] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
             />
-            <FieldError />
-          </TextField>
+            
+          </div>
         </div>
       </div>
 
       <div className="mt-10">
-        <Button
+        <button
           type="submit"
           className="
               w-full
@@ -379,9 +369,9 @@ const TutorAddForm = () => {
               "
         >
           Register Tutor
-        </Button>
+        </button>
       </div>
-    </Form>
+    </form>
   );
 };
 
