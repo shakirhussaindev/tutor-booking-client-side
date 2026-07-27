@@ -1,48 +1,53 @@
+"use client";
+
 import { FiCheckCircle, FiXCircle } from "react-icons/fi";
 
 const PasswordRules = ({ password = "" }) => {
-  const hasMinLength = password.length >= 8;
-  const hasNumber = /\d/.test(password);
-  const hasLowercase = /[a-z]/.test(password);
-  const hasUppercase = /[A-Z]/.test(password);
-
   const rules = [
     {
-      valid: hasMinLength,
+      valid: password.length >= 8,
       text: "At least 8 characters",
     },
     {
-      valid: hasNumber,
+      valid: /\d/.test(password),
       text: "At least 1 number",
     },
     {
-      valid: hasLowercase,
+      valid: /[a-z]/.test(password),
       text: "At least 1 lowercase letter",
     },
     {
-      valid: hasUppercase,
+      valid: /[A-Z]/.test(password),
       text: "At least 1 uppercase letter",
     },
   ];
 
   return (
-    <div className="mt-4 space-y-2">
-      {rules.map((rule) => (
-        <div
-          key={rule.text}
-          className={`flex items-center gap-2 text-sm transition-colors ${
-            rule.valid ? "text-green-600" : "text-slate-400"
-          }`}
-        >
-          {rule.valid ? (
-            <FiCheckCircle className="shrink-0" />
-          ) : (
-            <FiXCircle className="shrink-0" />
-          )}
+    <div className="mt-5 rounded-xl border border-border bg-muted/40 p-4 transition-colors">
+      <p className="mb-3 text-sm font-semibold text-foreground">
+        Password Requirements
+      </p>
 
-          <span>{rule.text}</span>
-        </div>
-      ))}
+      <div className="space-y-3">
+        {rules.map((rule) => (
+          <div
+            key={rule.text}
+            className={`flex items-center gap-3 text-sm transition-all duration-300 ${
+              rule.valid
+                ? "text-emerald-600 dark:text-emerald-400"
+                : "text-muted-foreground"
+            }`}
+          >
+            {rule.valid ? (
+              <FiCheckCircle className="h-4 w-4 shrink-0" />
+            ) : (
+              <FiXCircle className="h-4 w-4 shrink-0" />
+            )}
+
+            <span>{rule.text}</span>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

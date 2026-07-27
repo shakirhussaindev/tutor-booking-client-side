@@ -21,86 +21,105 @@ import PasswordRules from "@/components/ui/password-rules";
 
 const SignUpPage = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const {register,handleSubmit, watch, formState:{ errors },} = useForm();
 
-  const password = watch("password","")
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
+
+  const password = watch("password", "");
 
   const handleSubmitForm = (data) => {
     console.log(data);
   };
 
   return (
-    <section className=" bg-gradient-to-b from-sky-50 to-white py-16">
-      <div className="w-11/12 max-w-md mx-auto">
+    <section className="min-h-screen bg-background py-16 transition-colors">
+      <div className="mx-auto w-11/12 max-w-lg">
         {/* Header */}
 
-        <div className="text-center mb-8">
-          <h1 className="mt-4 text-[clamp(1.8rem,3vw,2.4rem)] font-bold text-slate-800">
-            Create Account
+        <div className="mb-8 text-center">
+          <span className="inline-flex items-center rounded-full border border-border bg-muted px-4 py-2 text-sm font-medium text-muted-foreground">
+            Welcome to Smart Tutor
+          </span>
+
+          <h1 className="mt-5 text-[clamp(2rem,4vw,2.8rem)] font-bold tracking-tight text-foreground">
+            Create Your Account
           </h1>
 
-          <p className="mt-2 text-slate-500">
-            Join Tutor Booking and start learning today.
+          <p className="mx-auto mt-3 max-w-sm leading-7 text-muted-foreground">
+            Join Smart Tutor today and connect with experienced tutors from
+            anywhere.
           </p>
         </div>
 
-        <div className="rounded-xl border border-slate-200 bg-white p-7 shadow-xl">
-          <form onSubmit={handleSubmit(handleSubmitForm)} className="space-y-5">
-            {/* Name */}
+        {/* Card */}
 
-            <div className="mb-5">
-              <Label className="mb-2 block">
+        <div className="rounded-3xl border border-border bg-card p-8 shadow-xl transition-colors">
+          <form onSubmit={handleSubmit(handleSubmitForm)} className="space-y-6">
+            {/* Full Name */}
+
+            <div>
+              <Label htmlFor="name" className="mb-2 block text-sm font-medium">
                 Full Name <span className="text-red-500">*</span>
               </Label>
 
               <div className="relative">
-                <FiUser className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" />
+                <FiUser className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground" />
 
                 <Input
+                  id="name"
+                  placeholder="John Doe"
+                  className="h-12 rounded-xl border-border bg-background pl-11 placeholder:text-muted-foreground"
                   {...register("name", {
                     required: "Name is required",
                   })}
-                  placeholder="John Doe"
-                  className="h-11 rounded-xl pl-11"
                 />
               </div>
+
               {errors.name && (
-                <p className="mt-1 text-sm text-red-500">
+                <p className="mt-2 text-sm text-red-500">
                   {errors.name.message}
                 </p>
               )}
             </div>
 
-            {/* Photo */}
+            {/* Photo URL */}
 
-            <div className="mb-5">
-              <Label className="mb-2 block">Photo URL</Label>
+            <div>
+              <Label htmlFor="image" className="mb-2 block text-sm font-medium">
+                Photo URL
+              </Label>
 
               <div className="relative">
-                <FiImage className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" />
+                <FiImage className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground" />
 
                 <Input
-                  {...register("image")}
+                  id="image"
                   placeholder="https://example.com/photo.jpg"
-                  className="h-11 rounded-xl pl-11"
+                  className="h-12 rounded-xl border-border bg-background pl-11 placeholder:text-muted-foreground"
+                  {...register("image")}
                 />
               </div>
             </div>
 
             {/* Email */}
 
-            <div className="mb-5">
-              <Label className="mb-2 block">
-                Email <span className="text-red-500">*</span>
+            <div>
+              <Label htmlFor="email" className="mb-2 block text-sm font-medium">
+                Email Address <span className="text-red-500">*</span>
               </Label>
 
               <div className="relative">
-                <FiMail className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" />
+                <FiMail className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground" />
 
                 <Input
+                  id="email"
                   type="email"
                   placeholder="john@example.com"
-                  className="h-11 rounded-xl pl-11"
+                  className="h-12 rounded-xl border-border bg-background pl-11 placeholder:text-muted-foreground"
                   {...register("email", {
                     required: "Email is required",
                     pattern: {
@@ -110,8 +129,9 @@ const SignUpPage = () => {
                   })}
                 />
               </div>
+
               {errors.email && (
-                <p className="mt-1 text-sm text-red-500">
+                <p className="mt-2 text-sm text-red-500">
                   {errors.email.message}
                 </p>
               )}
@@ -120,17 +140,21 @@ const SignUpPage = () => {
             {/* Password */}
 
             <div>
-              <Label className="mb-2 block">
+              <Label
+                htmlFor="password"
+                className="mb-2 block text-sm font-medium"
+              >
                 Password <span className="text-red-500">*</span>
               </Label>
 
               <div className="relative">
-                <FiLock className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" />
+                <FiLock className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground" />
 
                 <Input
+                  id="password"
                   type={showPassword ? "text" : "password"}
-                  placeholder="Enter password"
-                  className="h-11 rounded-xl pl-11 pr-11"
+                  placeholder="Enter your password"
+                  className="h-12 rounded-xl border-border bg-background pl-11 pr-11 placeholder:text-muted-foreground"
                   {...register("password", {
                     required: "Password is required",
                     minLength: {
@@ -146,13 +170,12 @@ const SignUpPage = () => {
 
                 <button
                   type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-500"
+                  onClick={() => setShowPassword((prev) => !prev)}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground transition-colors hover:text-foreground"
                 >
                   {showPassword ? <FiEyeOff /> : <FiEye />}
                 </button>
               </div>
-
               {errors.password && (
                 <p className="mt-2 text-sm text-red-500">
                   {errors.password.message}
@@ -164,39 +187,47 @@ const SignUpPage = () => {
               <PasswordRules password={password} />
             </div>
 
-            {/* Register */}
+            {/* Create Account Button */}
 
             <Button
               type="submit"
-              className="mt-6 h-11 w-full rounded-xl bg-gradient-to-r from-sky-600 to-cyan-500 hover:from-sky-700 hover:to-cyan-600"
+              size="lg"
+              className="mt-2 h-12 w-full rounded-xl bg-primary text-primary-foreground transition-all duration-300 hover:scale-[1.02] hover:opacity-90"
             >
               Create Account
             </Button>
           </form>
+
           {/* Divider */}
 
-          <div className="my-6 flex items-center gap-4">
-            <Separator orientation="horizontal" className="flex-1" />
+          <div className="my-8 flex items-center gap-4">
+            <Separator className="flex-1" />
 
-            <span className="px-2 text-sm text-slate-400">OR</span>
+            <span className="text-sm font-medium text-muted-foreground">
+              OR
+            </span>
 
-            <Separator orientation="horizontal" className="flex-1" />
+            <Separator className="flex-1" />
           </div>
 
-          {/* Google */}
+          {/* Google Login */}
 
-          <Button variant="outline" className="h-11 w-full rounded-xl">
-            <FcGoogle className="mr-2 text-xl" />
+          <Button
+            variant="outline"
+            size="lg"
+            className="h-12 w-full rounded-xl"
+          >
+            <FcGoogle className="mr-3 text-xl" />
             Continue with Google
           </Button>
 
           {/* Login */}
 
-          <p className="mt-6 text-center text-sm text-slate-500">
+          <p className="mt-8 text-center text-sm text-muted-foreground">
             Already have an account?{" "}
             <Link
               href="/login"
-              className="font-semibold text-sky-600 hover:text-sky-700"
+              className="font-semibold text-primary transition-colors hover:underline"
             >
               Login
             </Link>
