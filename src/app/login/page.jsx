@@ -54,6 +54,12 @@ const LoginPage = () => {
     }
   };
 
+  const handleGoogleSignin = async () => {
+    await authClient.signIn.social({
+      provider: "google",
+    });
+  };
+
   return (
     <section className="bg-gradient-to-b from-sky-50 to-white py-16 dark:from-background dark:to-background">
       <div className="mx-auto w-11/12 max-w-md">
@@ -166,6 +172,7 @@ const LoginPage = () => {
           {/* Google Login */}
 
           <Button
+          onClick={handleGoogleSignin}
             variant="outline"
             size="lg"
             className="h-12 w-full rounded-xl"

@@ -35,6 +35,7 @@ const SignUpPage = () => {
   const password = watch("password", "");
 
   const router = useRouter()
+
   const handleSubmitForm = async (data) => {
 
     const {name, image, email, password} = data
@@ -57,6 +58,12 @@ const SignUpPage = () => {
 
 
   };
+
+  const handleGoogleSignin = async () =>{
+    await authClient.signIn.social({
+      provider: "google"
+    })
+  }
 
   return (
     <section className="min-h-screen bg-background py-12 transition-colors">
@@ -236,6 +243,7 @@ const SignUpPage = () => {
           {/* Google Login */}
 
           <Button
+          onClick={handleGoogleSignin}
             variant="outline"
             size="lg"
             className="h-12 w-full rounded-xl"
