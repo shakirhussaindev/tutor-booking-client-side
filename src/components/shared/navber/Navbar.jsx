@@ -16,10 +16,9 @@ import UserMenu from "./UserMenu";
 const Navbar = () => {
   const [open, setOpen] = useState(false);
 
-  const {data: session} = authClient.useSession()
-  const user = session?.user
+  const { data: session } = authClient.useSession();
+  const user = session?.user;
 
- 
   return (
     <header className="sticky top-0 z-50 border-b border-border/50 bg-background/80 backdrop-blur-xl">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 lg:px-6">
@@ -36,7 +35,13 @@ const Navbar = () => {
           </Button>
 
           <Link href="/" className="flex items-center gap-2">
-            <Image src="/logo.png" width={42} height={42} alt="SMART TUTOR" priority/>
+            <Image
+              src="/logo.png"
+              width={42}
+              height={42}
+              alt="SMART TUTOR"
+              priority
+            />
 
             <div className="hidden sm:block">
               <h2 className="text-lg font-bold tracking-wide">SMART TUTOR</h2>
@@ -51,7 +56,7 @@ const Navbar = () => {
         {/* Center */}
 
         <nav className="hidden items-center gap-7 lg:flex">
-          <NavLinks user={user}/>
+          <NavLinks user={user} />
         </nav>
 
         {/* Right */}
@@ -65,23 +70,19 @@ const Navbar = () => {
             </>
           ) : (
             <>
-              <Button variant="ghost" asChild>
-                <Link href="/login">Login</Link>
-              </Button>
+              <Link href="/login">
+                <Button variant="ghost">Login</Button>
+              </Link>
 
-              <Button asChild>
-                <Link href="/signup">Sign Up</Link>
-              </Button>
+              <Link href="/signup">
+                <Button>Sign Up</Button>
+              </Link>
             </>
           )}
         </div>
       </div>
 
-      <MobileMenu
-        open={open}
-        setOpen={setOpen}
-        user={user}
-      />
+      <MobileMenu open={open} setOpen={setOpen} user={user} />
     </header>
   );
 };

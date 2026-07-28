@@ -38,7 +38,7 @@ const UserMenu = ({ user }) => {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild>
+      <DropdownMenuTrigger>
         <Button
           variant="ghost"
           className="h-auto rounded-full p-1 hover:bg-muted"
@@ -48,9 +48,9 @@ const UserMenu = ({ user }) => {
               <Image
                 src={user.image}
                 alt={user.name}
-                width={40}
-                height={40}
-                className="h-10 w-10 rounded-full border object-cover"
+                width={20}
+                height={20}
+                className="h-8 w-8 rounded-full border object-cover"
               />
             ) : (
               <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary text-sm font-bold text-primary-foreground">
@@ -74,7 +74,7 @@ const UserMenu = ({ user }) => {
 
         <DropdownMenuSeparator />
 
-        <DropdownMenuItem asChild>
+        <DropdownMenuItem>
           <Link href="/profile" className="cursor-pointer flex">
             <FiUser className="mr-2" />
             My Profile

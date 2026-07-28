@@ -17,7 +17,7 @@ const TutorDetailPage = async ({params}) => {
   const {id} = await params
   console.log({id})
 
-  const res = await fetch(`http://localhost:5000/tutors/${id}`);
+  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/tutors/${id}`);
   const tutorDetails = await res.json();
   console.log(tutorDetails);
   const {

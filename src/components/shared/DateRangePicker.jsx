@@ -15,7 +15,7 @@ import {
 export default function DateRangePicker({ date, setDate }) {
   return (
     <Popover>
-      <PopoverTrigger asChild>
+      <PopoverTrigger>
         <Button
           variant="outline"
           className="

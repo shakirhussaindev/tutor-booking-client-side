@@ -10,7 +10,9 @@ const TutorsPage = async ({ searchParams }) => {
   if (startDate) query.set("startDate", startDate);
   if (endDate) query.set("endDate", endDate);
 
-  const res = await fetch(`http://localhost:5000/tutors?${query.toString()}`);
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_SERVER_URL}/tutors`,
+  );
   const tutors = await res.json();
 
   return (

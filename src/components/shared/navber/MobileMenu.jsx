@@ -1,129 +1,3 @@
-// "use client";
-
-// import { useEffect } from "react";
-// import { X } from "lucide-react";
-
-// import { Button } from "@/components/ui/button";
-// import NavLinks from "./NavLinks";
-// import ThemeToggle from "./ThemeToggle";
-// import Link from "next/link";
-// import { authClient } from "@/lib/auth-client";
-
-// const MobileMenu = ({
-//   open,
-//   setOpen,
-//   user,
-//   handleLogout,
-// }) => {
-//   // Prevent body scroll
-//   useEffect(() => {
-//     document.body.style.overflow = open ? "hidden" : "auto";
-
-//     return () => {
-//       document.body.style.overflow = "auto";
-//     };
-//   }, [open]);
-
-//   const handleLogout = async () => {
-//     await authClient.signOut();
-
-//     setOpen(false);
-//   };
-
-//   return (
-//     <>
-//       {/* Overlay */}
-//       <div
-//         onClick={() => setOpen(false)}
-//         className={`
-//           fixed inset-0 z-40 bg-black/40 backdrop-blur-sm
-//           transition-all duration-300
-//           ${open ? "opacity-100 visible" : "opacity-0 invisible"}
-//         `}
-//       />
-
-//       {/* Menu */}
-//       <aside
-//         className={`
-//           fixed
-//           top-0
-//           left-0
-//           z-50
-//           h-screen
-//           w-[290px]
-//           border-r
-//           border-border
-//           bg-background
-//           shadow-2xl
-//           transition-transform
-//           duration-300
-//           ${open ? "translate-x-0" : "-translate-x-full"}
-//         `}
-//       >
-//         <div className="flex items-center justify-between border-b p-5">
-//           <h2 className="text-lg font-bold">SMART TUTOR</h2>
-
-//           <Button size="icon" variant="ghost" onClick={() => setOpen(false)}>
-//             <X className="size-5" />
-//           </Button>
-//         </div>
-
-//         <div className="space-y-2 p-5">
-//           <NavLinks user={user} mobile onClick={() => setOpen(false)} />
-//         </div>
-
-//         <div className="border-t p-5 space-y-4">
-//           <ThemeToggle />
-
-//           {user ? (
-//             <>
-//               <Button asChild className="w-full">
-//                 <Link href="/profile" onClick={() => setOpen(false)}>
-//                   Profile
-//                 </Link>
-//               </Button>
-
-//               {user && (
-//                 <div className="rounded-xl border p-4">
-//                   <p className="font-semibold">{user.name}</p>
-
-//                   <p className="text-sm text-muted-foreground truncate">
-//                     {user.email}
-//                   </p>
-//                 </div>
-//               )}
-
-//               <Button
-//                 variant="destructive"
-//                 className="w-full"
-//                 onClick={handleLogout}
-//               >
-//                 Logout
-//               </Button>
-//             </>
-//           ) : (
-//             <>
-//               <Button asChild className="w-full">
-//                 <Link href="/login" onClick={() => setOpen(false)}>
-//                   Login
-//                 </Link>
-//               </Button>
-
-//               <Button asChild variant="outline" className="w-full">
-//                 <Link href="/signup" onClick={() => setOpen(false)}>
-//                   Sign Up
-//                 </Link>
-//               </Button>
-//             </>
-//           )}
-//         </div>
-//       </aside>
-//     </>
-//   );
-// };
-
-// export default MobileMenu;
-
 "use client";
 
 import Link from "next/link";
@@ -225,11 +99,13 @@ const MobileMenu = ({ open, setOpen, user }) => {
 
           {user ? (
             <>
-              <Button asChild className="w-full">
-                <Link href="/profile" onClick={() => setOpen(false)}>
-                  My Profile
-                </Link>
-              </Button>
+              <Link
+                href="/profile"
+                onClick={() => setOpen(false)}
+                className="block"
+              >
+                <Button className="w-full">My Profile</Button>
+              </Link>
 
               <Button
                 variant="destructive"
@@ -241,17 +117,23 @@ const MobileMenu = ({ open, setOpen, user }) => {
             </>
           ) : (
             <>
-              <Button asChild className="w-full">
-                <Link href="/login" onClick={() => setOpen(false)}>
-                  Login
-                </Link>
-              </Button>
+              <Link
+                href="/login"
+                onClick={() => setOpen(false)}
+                className="block"
+              >
+                <Button className="w-full">Login</Button>
+              </Link>
 
-              <Button asChild variant="outline" className="w-full">
-                <Link href="/signup" onClick={() => setOpen(false)}>
+              <Link
+                href="/signup"
+                onClick={() => setOpen(false)}
+                className="block"
+              >
+                <Button variant="outline" className="w-full">
                   Sign Up
-                </Link>
-              </Button>
+                </Button>
+              </Link>
             </>
           )}
         </div>
