@@ -44,7 +44,7 @@ const TutorForm = () => {
       if (result) {
         toast.success("Tutor added successfully.");
 
-        // router.push("/my-tutors");
+        router.push("/my-tutors");
       }else{
 
         toast.error("Failed to add tutor.");

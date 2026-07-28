@@ -29,7 +29,9 @@ const UpdateTutorModal = ({
       reset(tutor);
     }
   }, [tutor, reset]);
+
   const onSubmit = async (data) => {
+    const { _id, ...updatedData } = data;
     try {
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_SERVER_URL}/tutors/${tutor._id}`,
@@ -38,11 +40,13 @@ const UpdateTutorModal = ({
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(data),
+          body: JSON.stringify(updatedData),
         },
       );
-
+      console.log(res.status)
       const result = await res.json();
+
+      console.log(result)
 
       if (result.modifiedCount) {
         toast.success("Tutor updated successfully");
@@ -55,7 +59,8 @@ const UpdateTutorModal = ({
 
         setOpen(false);
       }
-    } catch {
+    } catch(error) {
+      console.error(error);
       toast.error("Failed to update tutor");
     }
   };
