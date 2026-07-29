@@ -148,7 +148,7 @@ const TutorCard = ({ tutor }) => {
 
         {/* Price */}
 
-        <div className="mt-6 border-t pt-5">
+        <div className="mt-6 border-t border-border pt-5">
           <div className="flex items-center justify-between">
             <div>
               <p className="text-xs text-muted-foreground">Hourly Fee</p>
