@@ -274,7 +274,7 @@ const TutorAddForm = () => {
             </label>
 
             <input
-              type="text"
+              type="number"
               placeholder="3 Years"
               className="input w-full h-12 rounded-xl border-2 border-gray-200 pl-8 bg-white focus:border-sky-500 focus:outline-none"
             />

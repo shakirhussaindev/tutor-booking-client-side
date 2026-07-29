@@ -13,6 +13,8 @@ import {
 
 import { Button } from "@/components/ui/button";
 
+
+
 const TutorCard = ({ tutor }) => {
   const {
     _id,
@@ -171,9 +173,13 @@ const TutorCard = ({ tutor }) => {
             View Details
           </Button>
         </Link>
+
+      
       </div>
     </article>
   );
 };
 
 export default TutorCard;
+
+

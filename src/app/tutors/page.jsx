@@ -86,11 +86,7 @@ const TutorsPage = async ({ searchParams }) => {
 
 
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_SERVER_URL}/tutors?${query.toString()}`,
-    {
-      cache: "no-store",
-    },
-  );
+    `${process.env.NEXT_PUBLIC_SERVER_URL}/tutors?${query.toString()}`);
 
   const tutors = await res.json();
 
@@ -199,7 +195,7 @@ const TutorsPage = async ({ searchParams }) => {
                     text-muted-foreground
                     "
                 >
-                  We couldn't find any tutor matching your search. Try changing
+                  We could not find any tutor matching your search. Try changing
                   your filters.
                 </p>
               </div>
