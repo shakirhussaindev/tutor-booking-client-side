@@ -52,7 +52,7 @@ const TutorCard = ({ tutor }) => {
   ];
 
   return (
-    <article
+    <div
       className="
         group
         flex
@@ -176,7 +176,7 @@ const TutorCard = ({ tutor }) => {
 
       
       </div>
-    </article>
+    </div>
   );
 };
 

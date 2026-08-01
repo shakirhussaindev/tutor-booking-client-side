@@ -313,6 +313,7 @@ const TutorForm = () => {
                 </Label>
 
                 <Input
+                type='number'
                   {...register("experience", {
                     required: "Experience is required",
                   })}

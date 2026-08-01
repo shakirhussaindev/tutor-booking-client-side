@@ -124,38 +124,213 @@
 
 // export default SearchFilter;
 
+// "use client";
+
+// import { FiRefreshCw, FiSearch } from "react-icons/fi";
+
+// import DateRangePicker from "../shared/DateRangePicker";
+
+// import { useEffect, useState } from "react";
+
+// import { usePathname, useRouter, useSearchParams } from "next/navigation";
+
+// import { format } from "date-fns";
+
+// const SearchFilter = () => {
+//   const router = useRouter();
+//   const pathname = usePathname();
+//   const searchParams = useSearchParams();
+
+//   const [search, setSearch] = useState(searchParams.get("search") || "");
+
+//   const [date, setDate] = useState();
+
+//   useEffect(() => {
+//     const timer = setTimeout(() => {
+//       const params = new URLSearchParams(searchParams.toString());
+
+//       if (search.trim()) {
+//         params.set("search", search);
+//       } else {
+//         params.delete("search");
+//       }
+
+//       router.replace(`${pathname}?${params.toString()}`);
+//     }, 400);
+
+//     return () => clearTimeout(timer);
+//   }, [search, pathname, router, searchParams]);
+
+//   const handleDateSearch = () => {
+//     const params = new URLSearchParams(searchParams.toString());
+
+//     if (date?.from) {
+//       params.set("startDate", format(date.from, "yyyy-MM-dd"));
+//     } else {
+//       params.delete("startDate");
+//     }
+
+//     if (date?.to) {
+//       params.set("endDate", format(date.to, "yyyy-MM-dd"));
+//     } else {
+//       params.delete("endDate");
+//     }
+
+//     router.replace(`${pathname}?${params.toString()}`);
+//   };
+
+//   const handleReset = () => {
+//     setSearch("");
+//     setDate(undefined);
+
+//     router.replace(pathname);
+//   };
+
+//   return (
+//     <section className="mb-8">
+//       <div
+//         className="flex flex-col gap-5 lg:flex-row lg:items-end" >
+//         <div className="flex-1">
+//           <label
+//             className="mb-2 block text-sm font-semibold text-foreground">
+//             Search Tutor
+//           </label>
+
+//           <div className="relative">
+//             <FiSearch
+//               className="
+// absolute
+// left-5
+// top-1/2
+// -translate-y-1/2
+// text-primary
+// "
+//             />
+
+//             <input
+//               value={search}
+//               onChange={(e) => setSearch(e.target.value)}
+//               placeholder="Search by tutor name..."
+//               className="
+// h-12
+// w-full
+// rounded-xl
+// border
+// border-border
+// bg-background
+// pl-14
+// pr-4
+// text-foreground
+// placeholder:text-muted-foreground
+// outline-none
+// transition
+// focus:ring-4
+// focus:ring-primary/20
+// "
+//             />
+//           </div>
+//         </div>
+
+//         <div className="w-full lg:w-[350px]">
+//           <label
+//             className="
+// mb-2
+// block
+// text-sm
+// font-semibold
+// text-foreground
+// "
+//           >
+//             Registration Date
+//           </label>
+
+//           <DateRangePicker date={date} setDate={setDate} />
+//         </div>
+
+//         <button
+//           onClick={handleDateSearch}
+//           className="
+// flex
+// h-12
+// items-center
+// justify-center
+// gap-2
+// rounded-xl
+// bg-sky-500 text-white cursor-pointer 
+// px-6
+// font-semibold
+// transition
+// hover:opacity-90
+// "
+//         >
+//           <FiSearch />
+//           Search
+//         </button>
+
+//         <button
+//           onClick={handleReset}
+//           className="
+// flex
+// h-12
+// items-center
+// justify-center
+// gap-2
+// rounded-xl
+// border
+// border-border
+// bg-background
+// px-6
+// font-semibold
+// text-foreground
+// transition
+// hover:bg-muted
+// "
+//         >
+//           <FiRefreshCw />
+//           Reset
+//         </button>
+//       </div>
+//     </section>
+//   );
+// };
+
+// export default SearchFilter;
+
+
 "use client";
 
-import { FiRefreshCw, FiSearch } from "react-icons/fi";
-
-import DateRangePicker from "../shared/DateRangePicker";
-
-import { useEffect, useState } from "react";
-
+import { useEffect, useState, useTransition } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-
+import { FiRefreshCw, FiSearch } from "react-icons/fi";
 import { format } from "date-fns";
+import DateRangePicker from "../shared/DateRangePicker";
 
 const SearchFilter = () => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
+  const [isPending, startTransition] = useTransition();
 
   const [search, setSearch] = useState(searchParams.get("search") || "");
-
   const [date, setDate] = useState();
 
+  // Debounce search input update
   useEffect(() => {
     const timer = setTimeout(() => {
-      const params = new URLSearchParams(searchParams.toString());
+      const currentSearchParam = searchParams.get("search") || "";
+      
+      if (search !== currentSearchParam) {
+        const params = new URLSearchParams(searchParams.toString());
+        if (search.trim()) {
+          params.set("search", search.trim());
+        } else {
+          params.delete("search");
+        }
 
-      if (search.trim()) {
-        params.set("search", search);
-      } else {
-        params.delete("search");
+        startTransition(() => {
+          router.replace(`${pathname}?${params.toString()}`, { scroll: false });
+        });
       }
-
-      router.replace(`${pathname}?${params.toString()}`);
     }, 400);
 
     return () => clearTimeout(timer);
@@ -176,120 +351,68 @@ const SearchFilter = () => {
       params.delete("endDate");
     }
 
-    router.replace(`${pathname}?${params.toString()}`);
+    startTransition(() => {
+      router.replace(`${pathname}?${params.toString()}`, { scroll: false });
+    });
   };
 
   const handleReset = () => {
     setSearch("");
     setDate(undefined);
-
-    router.replace(pathname);
+    startTransition(() => {
+      router.replace(pathname, { scroll: false });
+    });
   };
 
   return (
     <section className="mb-8">
-      <div
-        className="flex flex-col gap-5 lg:flex-row lg:items-end" >
+      <div className="flex flex-col gap-5 lg:flex-row lg:items-end">
+        {/* Search Field */}
         <div className="flex-1">
-          <label
-            className="mb-2 block text-sm font-semibold text-foreground">
+          <label className="mb-2 block text-sm font-semibold text-foreground">
             Search Tutor
           </label>
-
           <div className="relative">
-            <FiSearch
-              className="
-absolute
-left-5
-top-1/2
--translate-y-1/2
-text-primary
-"
-            />
-
+            <FiSearch className="absolute left-5 top-1/2 -translate-y-1/2 text-primary text-lg" />
             <input
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Search by tutor name..."
-              className="
-h-12
-w-full
-rounded-xl
-border
-border-border
-bg-background
-pl-14
-pr-4
-text-foreground
-placeholder:text-muted-foreground
-outline-none
-transition
-focus:ring-4
-focus:ring-primary/20
-"
+              className="h-12 w-full rounded-xl border border-border bg-background pl-14 pr-4 text-foreground placeholder:text-muted-foreground outline-none transition focus:ring-4 focus:ring-primary/20"
             />
           </div>
         </div>
 
+        {/* Date Field */}
         <div className="w-full lg:w-[350px]">
-          <label
-            className="
-mb-2
-block
-text-sm
-font-semibold
-text-foreground
-"
-          >
+          <label className="mb-2 block text-sm font-semibold text-foreground">
             Registration Date
           </label>
-
           <DateRangePicker date={date} setDate={setDate} />
         </div>
 
-        <button
-          onClick={handleDateSearch}
-          className="
-flex
-h-12
-items-center
-justify-center
-gap-2
-rounded-xl
-bg-primary
-px-6
-font-semibold
-text-primary-foreground
-transition
-hover:opacity-90
-"
-        >
-          <FiSearch />
-          Search
-        </button>
+        {/* Action Buttons */}
+        <div className="flex gap-3">
+          <button
+            type="button"
+            onClick={handleDateSearch}
+            disabled={isPending}
+            className="flex h-12 items-center justify-center gap-2 rounded-xl bg-sky-500 hover:bg-sky-600 text-white cursor-pointer px-6 font-semibold transition disabled:opacity-50"
+          >
+            <FiSearch />
+            Search
+          </button>
 
-        <button
-          onClick={handleReset}
-          className="
-flex
-h-12
-items-center
-justify-center
-gap-2
-rounded-xl
-border
-border-border
-bg-background
-px-6
-font-semibold
-text-foreground
-transition
-hover:bg-muted
-"
-        >
-          <FiRefreshCw />
-          Reset
-        </button>
+          <button
+            type="button"
+            onClick={handleReset}
+            disabled={isPending}
+            className="flex h-12 items-center justify-center gap-2 rounded-xl border border-border bg-background px-6 font-semibold text-foreground transition hover:bg-muted cursor-pointer disabled:opacity-50"
+          >
+            <FiRefreshCw className={isPending ? "animate-spin" : ""} />
+            Reset
+          </button>
+        </div>
       </div>
     </section>
   );

@@ -26,7 +26,7 @@ const links = [
   },
   {
     title: "Booked Sessions",
-    href: "/my-booked-sessions",
+    href: "/my-bookings",
     private: true,
   },
 ];

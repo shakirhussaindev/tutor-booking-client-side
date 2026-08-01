@@ -69,132 +69,203 @@
 // export default TutorsPage;
 
 
+// import SearchFilter from "@/components/tutor/SearchFilter";
+// import TutorCard from "@/components/tutor/TutorCard";
+
+// const TutorsPage = async ({ searchParams }) => {
+
+//   const params = await searchParams;
+//   const { search = "", startDate = "", endDate = "" } = params;
+
+//   const query = new URLSearchParams();
+
+//   if (search) query.set("search", search);
+//   if (startDate) query.set("startDate", startDate);
+//   if (endDate) query.set("endDate", endDate);
+
+
+
+//   const res = await fetch(
+//     `${process.env.NEXT_PUBLIC_SERVER_URL}/tutors?${query.toString()}`);
+
+//   const tutors = await res.json();
+
+//   return (
+//     <section
+//       className="
+//       min-h-screen
+//       bg-background
+//       py-16
+//       "
+//     >
+//       <div className="mx-auto w-11/12 max-w-7xl">
+//         {/* Hero */}
+
+//         <div className="mb-14 text-center">
+//           <span
+//             className="
+//             inline-flex
+//             rounded-full
+//             bg-primary/10
+//             px-5
+//             py-2
+//             text-sm
+//             font-semibold
+//             text-primary
+//             "
+//           >
+//             Find Your Perfect Tutor
+//           </span>
+
+//           <h1
+//             className="
+//             mt-5
+//             text-[clamp(2rem,5vw,3rem)]
+//             font-bold
+//             tracking-tight
+//             text-foreground
+//             "
+//           >
+//             Learn From Expert Tutors
+//           </h1>
+
+//           <p
+//             className="
+//             mx-auto
+//             mt-5
+//             max-w-2xl
+//             text-muted-foreground
+//             leading-7
+//             "
+//           >
+//             Browse experienced tutors from different subjects and book your
+//             preferred learning session easily.
+//           </p>
+//         </div>
+
+//         {/* Main */}
+
+//         <div
+//           className="
+//           rounded-2xl
+//           border
+//           border-border
+//           bg-card
+//           p-5
+//           shadow-sm
+//           md:p-8
+//           "
+//         >
+//           <SearchFilter />
+
+//           <div
+//             className="
+//             grid
+//             grid-cols-1
+//             gap-8
+//             md:grid-cols-2
+//             xl:grid-cols-3
+//             "
+//           >
+//             {tutors.length > 0 ? (
+//               tutors.map((tutor) => <TutorCard key={tutor._id} tutor={tutor} />)
+//             ) : (
+//               <div
+//                 className="
+//                   col-span-full
+//                   py-20
+//                   text-center
+//                   "
+//               >
+//                 <h2
+//                   className="
+//                     text-3xl
+//                     font-bold
+//                     text-destructive
+//                     "
+//                 >
+//                   No Tutor Found
+//                 </h2>
+
+//                 <p
+//                   className="
+//                     mx-auto
+//                     mt-4
+//                     max-w-md
+//                     text-muted-foreground
+//                     "
+//                 >
+//                   We could not find any tutor matching your search. Try changing
+//                   your filters.
+//                 </p>
+//               </div>
+//             )}
+//           </div>
+//         </div>
+//       </div>
+//     </section>
+//   );
+// };
+
+// export default TutorsPage;
+
+
+
 import SearchFilter from "@/components/tutor/SearchFilter";
 import TutorCard from "@/components/tutor/TutorCard";
 
 const TutorsPage = async ({ searchParams }) => {
-
   const params = await searchParams;
-  const { search = "", startDate = "", endDate = "" } = params;
+  const { search = "", startDate = "", endDate = "" } = params || {};
 
   const query = new URLSearchParams();
-
   if (search) query.set("search", search);
   if (startDate) query.set("startDate", startDate);
   if (endDate) query.set("endDate", endDate);
 
-
-
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_SERVER_URL}/tutors?${query.toString()}`);
+    `${process.env.NEXT_PUBLIC_SERVER_URL}/tutors?${query.toString()}`,
+    {
+      next: { revalidate: 60 }, // অপটিমাইজেশন: ৬০ সেকেন্ড ডাটা ক্যাশ থাকবে
+    },
+  );
 
-  const tutors = await res.json();
+  const tutors = res.ok ? await res.json() : [];
 
   return (
-    <section
-      className="
-      min-h-screen
-      bg-background
-      py-16
-      "
-    >
+    <section className="min-h-screen bg-background py-16">
       <div className="mx-auto w-11/12 max-w-7xl">
         {/* Hero */}
-
         <div className="mb-14 text-center">
-          <span
-            className="
-            inline-flex
-            rounded-full
-            bg-primary/10
-            px-5
-            py-2
-            text-sm
-            font-semibold
-            text-primary
-            "
-          >
+          <span className="inline-flex rounded-full bg-primary/10 px-5 py-2 text-sm font-semibold text-primary">
             Find Your Perfect Tutor
           </span>
 
-          <h1
-            className="
-            mt-5
-            text-[clamp(2rem,5vw,3rem)]
-            font-bold
-            tracking-tight
-            text-foreground
-            "
-          >
+          <h1 className="mt-5 text-[clamp(2rem,5vw,3rem)] font-bold tracking-tight text-foreground">
             Learn From Expert Tutors
           </h1>
 
-          <p
-            className="
-            mx-auto
-            mt-5
-            max-w-2xl
-            text-muted-foreground
-            leading-7
-            "
-          >
+          <p className="mx-auto mt-5 max-w-2xl text-muted-foreground leading-7">
             Browse experienced tutors from different subjects and book your
             preferred learning session easily.
           </p>
         </div>
 
-        {/* Main */}
-
-        <div
-          className="
-          rounded-2xl
-          border
-          border-border
-          bg-card
-          p-5
-          shadow-sm
-          md:p-8
-          "
-        >
+        {/* Main Section */}
+        <div className="rounded-2xl border border-border bg-card p-5 shadow-sm md:p-8">
           <SearchFilter />
 
-          <div
-            className="
-            grid
-            grid-cols-1
-            gap-8
-            md:grid-cols-2
-            xl:grid-cols-3
-            "
-          >
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-3">
             {tutors.length > 0 ? (
-              tutors.map((tutor) => <TutorCard key={tutor._id} tutor={tutor} />)
+              tutors.map((tutor) => (
+                <TutorCard key={tutor._id || tutor.id} tutor={tutor} />
+              ))
             ) : (
-              <div
-                className="
-                  col-span-full
-                  py-20
-                  text-center
-                  "
-              >
-                <h2
-                  className="
-                    text-3xl
-                    font-bold
-                    text-destructive
-                    "
-                >
+              <div className="col-span-full py-20 text-center">
+                <h2 className="text-3xl font-bold text-destructive">
                   No Tutor Found
                 </h2>
-
-                <p
-                  className="
-                    mx-auto
-                    mt-4
-                    max-w-md
-                    text-muted-foreground
-                    "
-                >
+                <p className="mx-auto mt-4 max-w-md text-muted-foreground">
                   We could not find any tutor matching your search. Try changing
                   your filters.
                 </p>
