@@ -11,14 +11,20 @@ const MyBookingsPage = async () => {
     headers: await headers(),
   });
 
-  if (!session?.user) {
-    return <div>Unauthorized</div>;
-  }
+  // if (!session?.user) {
+  //   return <div>Unauthorized</div>;
+  // }
+
+  const {token} = await auth.api.getToken({
+    headers: await headers()
+  })
 
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_SERVER_URL}/bookings?email=${session.user.email}`,
     {
-      cache: "no-store",
+      headers:{
+        authorization: `Bearer ${token}`
+      }
     },
   );
 

@@ -4,6 +4,7 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 
 import { Button } from "@/components/ui/button";
+import { authClient } from "@/lib/auth-client";
 
 const BookingTable = ({ bookings }) => {
   const [tableData, setTableData] = useState(bookings);
@@ -12,11 +13,15 @@ const BookingTable = ({ bookings }) => {
   const handleCancel = async (id) => {
     setLoadingId(id);
 
+    const { data: tokenData } = await authClient.token();
     try {
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_SERVER_URL}/bookings/${id}`,
         {
           method: "PATCH",
+          headers: {
+            authorization: `Bearer ${tokenData?.token}`,
+          },
         },
       );
 

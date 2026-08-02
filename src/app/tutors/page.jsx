@@ -214,6 +214,14 @@
 import SearchFilter from "@/components/tutor/SearchFilter";
 import TutorCard from "@/components/tutor/TutorCard";
 
+
+export const metadata = {
+  title: "Find Expert Tutors | Smart Tutor",
+  description:
+    "Explore qualified tutors for Mathematics, Physics, Chemistry, Biology, English, Computer Science, and more. Search, filter, compare tutor profiles, and book your preferred learning session with Smart Tutor.",
+};
+
+
 const TutorsPage = async ({ searchParams }) => {
   const params = await searchParams;
   const { search = "", startDate = "", endDate = "" } = params || {};
@@ -222,11 +230,12 @@ const TutorsPage = async ({ searchParams }) => {
   if (search) query.set("search", search);
   if (startDate) query.set("startDate", startDate);
   if (endDate) query.set("endDate", endDate);
+  
 
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_SERVER_URL}/tutors?${query.toString()}`,
     {
-      next: { revalidate: 60 }, // অপটিমাইজেশন: ৬০ সেকেন্ড ডাটা ক্যাশ থাকবে
+      next: { revalidate: 60 }, 
     },
   );
 
@@ -258,7 +267,7 @@ const TutorsPage = async ({ searchParams }) => {
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-3">
             {tutors.length > 0 ? (
               tutors.map((tutor) => (
-                <TutorCard key={tutor._id || tutor.id} tutor={tutor} />
+                <TutorCard key={tutor._id} tutor={tutor} />
               ))
             ) : (
               <div className="col-span-full py-20 text-center">

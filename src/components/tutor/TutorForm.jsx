@@ -23,16 +23,17 @@ const TutorForm = () => {
   const router = useRouter();
 
   const handleTutorSubmit = async (data) => {
+
+    const {data:tokenData} = await authClient.token()
+
     try {
-      const tutor = {
-        ...data,
-        email: session?.user?.email,
-      };
+      const tutor = {...data, email: session?.user?.email,};
 
       const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/tutors`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          authorization: `Bearer ${tokenData?.token}`
         },
         body: JSON.stringify(tutor),
       });

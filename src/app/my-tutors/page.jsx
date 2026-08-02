@@ -11,12 +11,17 @@ export default async function MyTutorsPage() {
     headers: await headers(),
   });
 
-  if (!session) return null;
+  const {token} = await auth.api.getToken({
+    headers: await headers()
+  })
+
+  // if (!session) return null;
 
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_SERVER_URL}/my-tutors?email=${session.user.email}`,
-    {
-      cache: "no-store",
+    `${process.env.NEXT_PUBLIC_SERVER_URL}/my-tutors?email=${session.user.email}`, {
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
     },
   );
 

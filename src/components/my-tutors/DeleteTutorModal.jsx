@@ -28,11 +28,16 @@ const DeleteTutorModal = ({
 
     setLoading(true);
 
+    const { data: tokenData } = await authClient.token();
+
     try {
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_SERVER_URL}/tutors/${tutor._id}`,
         {
           method: "DELETE",
+          headers: {
+            authorization: `Bearer ${tokenData?.token}`,
+          },
         },
       );
       const result = await res.json();

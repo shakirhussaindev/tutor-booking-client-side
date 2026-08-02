@@ -47,6 +47,9 @@ const BookSessionModal = ({ open, setOpen, tutor }) => {
       tutorName: tutor.name,
     };
 
+
+    const { data: tokenData } = await authClient.token();
+
     try {
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_SERVER_URL}/bookings`,
@@ -55,6 +58,7 @@ const BookSessionModal = ({ open, setOpen, tutor }) => {
 
           headers: {
             "Content-Type": "application/json",
+            authorization: `Bearer ${tokenData?.token}`,
           },
 
           body: JSON.stringify(tutorBookingInfo),

@@ -14,6 +14,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { authClient } from "@/lib/auth-client";
 
 const UpdateTutorModal = ({
   open,
@@ -32,6 +33,9 @@ const UpdateTutorModal = ({
 
   const onSubmit = async (data) => {
     const { _id, ...updatedData } = data;
+
+    const {data:tokenData} = await authClient.token()
+    
     try {
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_SERVER_URL}/tutors/${tutor._id}`,
@@ -39,14 +43,12 @@ const UpdateTutorModal = ({
           method: "PATCH",
           headers: {
             "Content-Type": "application/json",
+            authorization: `Bearer ${tokenData?.token}`,
           },
           body: JSON.stringify(updatedData),
         },
       );
-      console.log(res.status)
       const result = await res.json();
-
-      console.log(result)
 
       if (result.modifiedCount) {
         toast.success("Tutor updated successfully");

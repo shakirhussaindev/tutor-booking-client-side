@@ -39,7 +39,7 @@ const stats = [
 
 const StatisticsStrip = () => {
   return (
-    <section className="relative -mt-14 z-20">
+    <section className="relative -mt-6 z-20">
       <div className="w-11/12 max-w-7xl mx-auto">
         <div className="rounded-3xl border border-border bg-background/90 backdrop-blur-xl shadow-2xl">
           <div className="grid grid-cols-2 lg:grid-cols-4">

@@ -1,47 +1,60 @@
 
 
 import TutorDetails from "@/components/tutorDetails/TutorDetails";
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
+import { cache } from "react";
 
-export async function generateMetadata({ params }) {
-  const { id } = await params;
 
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_SERVER_URL}/tutors/${id}`,
-    {
-      cache: "no-store",
-    },
-  );
 
-  if (!res.ok) {
-    return {
-      title: "Tutor Not Found",
-      description: "Tutor details could not be found.",
-    };
-  }
+// export async function generateMetadata({ params }) {
+//   const { id } = await params;
 
-  const tutor = await res.json();
+//   const res = await fetch(
+//     `${process.env.NEXT_PUBLIC_SERVER_URL}/tutors/${id}`,
+//     {
+//       cache: "no-store",
+//     },
+//   );
 
-  return {
-    title: `${tutor.name} | Tutor Details`,
-    description: tutor.about?.slice(0, 150),
-  };
-}
+//   if (!res.ok) {
+//     return {
+//       title: "Tutor Not Found",
+//       description: "Tutor details could not be found.",
+//     };
+//   }
+
+//   const tutor = await res.json();
+
+//   return {
+//     title: `${tutor.name} | Tutor Details`,
+//     description: tutor.about?.slice(0, 150),
+//   };
+// }
+
+
+// const getTutor = cache( async (id)=>{
+//   const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/tutors/${id}`);
+//    await res.json();
+// })
+
+
 
 const TutorDetailPage = async ({ params }) => {
   const { id } = await params;
 
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_SERVER_URL}/tutors/${id}`);
+  const {token} = await auth.api.getToken({
+    headers: await headers()
+  })
 
-  if (!res.ok) {
-    return (
-      <section className="flex min-h-[70vh] items-center justify-center">
-        <h2 className="text-2xl font-semibold text-red-500">Tutor not found</h2>
-      </section>
-    );
-  }
 
-  const tutor = await res.json();
+  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/tutors/${id}`,{
+    headers:{
+      authorization: `Bearer ${token}`
+    }
+  });
+  const tutor =  await res.json();
+  // const tutor = await getTutor(id);
 
   return <TutorDetails tutor={tutor} />;
 };
