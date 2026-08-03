@@ -22,8 +22,8 @@ import { useRouter, useSearchParams } from "next/navigation";
 
 const LoginPage = () => {
 
-  const searchParams = useSearchParams()
-  const redirectTo = searchParams.get("redirect") || "/"
+  // const searchParams = useSearchParams()
+  // const redirectTo = searchParams.get("redirect") || "/"
   const router = useRouter()
   const [showPassword, setShowPassword] = useState(false);
 

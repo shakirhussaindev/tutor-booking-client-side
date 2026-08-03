@@ -19,7 +19,7 @@ const ErrorPage = ({ reset }) => {
 
         {/* Description */}
         <p className="mt-3 leading-7 text-muted-foreground">
-          We couldn't complete your request. Please try again or return to the
+          We could not complete your request. Please try again or return to the
           home page.
         </p>
 
