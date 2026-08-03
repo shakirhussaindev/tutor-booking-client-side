@@ -8,7 +8,14 @@ export async function proxy(request) {
   });
 
   if (!session) {
-    return NextResponse.redirect(new URL("/login", request.url));
+    return NextResponse.redirect(
+      new URL(
+        `/login?redirect=${encodeURIComponent(
+          request.nextUrl.pathname + request.nextUrl.search,
+        )}`,
+        request.url,
+      ),
+    );
   }
 }
 
