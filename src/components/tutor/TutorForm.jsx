@@ -389,7 +389,7 @@ const TutorForm = () => {
 
               <div>
                 <Label className="mb-2">
-                  Total Weekly Slots<span className="text-red-500">*</span>
+                  Total Slots<span className="text-red-500">*</span>
                 </Label>
 
                 <Input

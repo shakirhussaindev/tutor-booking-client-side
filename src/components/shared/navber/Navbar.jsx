@@ -34,11 +34,11 @@ const Navbar = () => {
             <Menu className="size-6" />
           </Button>
 
-          <Link href="/" className="flex items-center gap-2">
+          <Link href="/" className="flex items-center gap-3">
             <Image
-              src="/logo.png"
-              width={42}
-              height={42}
+              src="/logo2.png"
+              width={50}
+              height={50}
               alt="SMART TUTOR"
               priority
             />
