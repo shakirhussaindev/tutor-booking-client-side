@@ -1,36 +1,84 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 🎓 Smart Tutor
 
-## Getting Started
+Smart Tutor is an online tutor booking platform where students can easily find qualified tutors, explore tutor profiles, and book learning sessions. Tutors can manage their profiles, while students can securely book and manage their sessions through an intuitive and responsive interface.
 
-First, run the development server:
+## 🌐 Live Website
+
+🔗 https://tutor-booking-client-side.vercel.app/
+
+## ✨ Features
+
+- 🔍 Search and filter tutors by name and session start date.
+- 📚 View detailed tutor profiles including experience, teaching mode, available days, hourly fee, and session information.
+- 📅 Secure tutor session booking with slot availability validation.
+- 👤 Authentication using Better Auth with Email/Password and Google Sign-in.
+- 📋 Personal dashboard to manage booked sessions, tutor listings, and user profile.
+
+## 🛠️ Tech Stack
+
+### Frontend
+- Next.js 16 (App Router)
+- React
+- Tailwind CSS
+- shadcn/ui
+- Better Auth
+- React Hook Form
+- React Hot Toast
+- React Icons
+
+### Backend
+- Express.js
+- MongoDB
+- JWT Authentication (Better Auth + jose)
+
+## 🚀 Installation
+
+Clone the repository:
+
+```bash
+git clone https://github.com/shakirhussaindev/tutor-booking-client-side.git
+```
+
+Go to the project directory:
+
+```bash
+cd tutor-booking-client-side
+```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open:
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+```
+http://localhost:3000
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🔑 Environment Variables
 
-## Learn More
+Create a `.env` file and add:
 
-To learn more about Next.js, take a look at the following resources:
+```env
+MONGO_URI=your_mongodb_uri
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+BETTER_AUTH_SECRET=your_secret_key
+BETTER_AUTH_URL=http://localhost:3000
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+NEXT_PUBLIC_SERVER_URL=http://localhost:5000
 
-## Deploy on Vercel
+GOOGLE_CLIENT_ID=your_google_client_id
+GOOGLE_SECRET=your_google_client_secret
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 📄 License
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This project is created for educational purposes.
