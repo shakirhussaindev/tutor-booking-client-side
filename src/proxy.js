@@ -23,9 +23,9 @@ export const config = {
   matcher: [
     "/add-tutor",
     "/my-tutors",
-    "/my-booked-sessions",
+    "/my-tutors",
     "/tutors/:path",
-    "/profile"
+    "/profile",
   ],
 };
 
